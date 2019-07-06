@@ -4,13 +4,16 @@ pipeline
     stages {
       stage ('clone my code')
       {
-      steps {
-      git 'https://github.com/jyotibhalerao15/maven-project' }
+      steps 
+            {
+              git 'https://github.com/jyotibhalerao15/maven-project' 
+            }
       }
       stage ('Compile')
       {
            steps 
-            withmaven (maven : 'local-maven')  { sh 'mvn compile' }
+            withmaven (maven : 'local-maven') 
+            { sh 'mvn compile' }
       }
            }
 }
