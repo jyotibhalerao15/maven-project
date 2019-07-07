@@ -12,15 +12,15 @@ pipeline {
     
         stage ('Compile Stage')
         {
-        agent label 'master-node'
-        {
+        agent {label 'master-node'}
+        
 
             steps {
                 withMaven(maven : 'local-maven') {
                     sh 'mvn clean install'
                                                   }
                   }
-                }
+                
          }
 
       stage ('Deploy')
