@@ -28,6 +28,7 @@ pipeline {
                      sh 'scp -o StrictHostKeyChecking=no /target/webapp/*.war ec2-user@18.188.198.125:/var/lib/tomcat/webapps'
                     }
                     }
+                    }
               }
 }
 }
