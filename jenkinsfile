@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage('SCM Checkout'){
           git 'https://github.com/jyotibhalerao15/maven-project'
-        }
-  }
+                             }
+           }
     {
         stage ('Compile Stage') {
 
@@ -15,6 +15,16 @@ pipeline {
                     sh 'mvn clean install'
                 }
             }
+}
+stage ('Deploy')
+{
+steps 
+{
+ 
+  sshagent (credentials: ['f6201e5b-e1ee-49ef-b462-bffc4fd69059']) {
+    sh 'scp -o StrictHostKeyChecking=no -l ec2-user@18.188.198.125:/usr/share/tomcat/webapps uname -a'
+  
+}
 }
 }
 }
