@@ -34,5 +34,13 @@ pipeline {
                     
                     }
               }
+              post {
+    success {
+      // notify users when the Pipeline fails
+      mail to: 'jyoti.bhalerao15@gmail.com',
+          subject: "Success Build",
+          body: "Finished job successfully"
+    }
+  }
 }
 }
