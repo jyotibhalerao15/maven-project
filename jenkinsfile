@@ -29,7 +29,7 @@ pipeline {
                     
  
                       sshagent (credentials: ['f6201e5b-e1ee-49ef-b462-bffc4fd69059']) {
-                     sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline-demo-maven/webapp/target/*.war ec2-user@18.223.20.186:/var/lib/tomcat/webapps'
+                     sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline-demo-maven/webapp/target/*.war ec2-user@13.59.91.51:/var/lib/tomcat/webapps'
                     }
                     
                     }
