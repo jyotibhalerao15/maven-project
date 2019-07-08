@@ -34,7 +34,9 @@ pipeline {
                     
                     }
               }
-              post {
+             
+}
+ post {
     success {
       // notify users when the Pipeline fails
       mail to: 'jyoti.bhalerao15@gmail.com',
@@ -42,5 +44,4 @@ pipeline {
           body: "Finished job successfully"
     }
   }
-}
 }
