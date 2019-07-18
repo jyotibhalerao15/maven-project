@@ -6,7 +6,7 @@ stages
 stage ('SCM Checkout') {
 
    steps { 
-   git 'https://github.com/jyotibhalerao15/maven-project.git'
+   git 'https://github.com/jyotibhalerao15/maven-project'
          }
                      }
 stage ('Clean')
