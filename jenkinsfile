@@ -17,7 +17,7 @@ sh 'ant clean'
 }
 }
 
-stage ('Create work dir')
+stage ('Init')
 {
 steps
 { withAnt (installation: 'ant',jdk :'jdk')
