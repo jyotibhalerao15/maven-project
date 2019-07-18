@@ -1,48 +1,82 @@
-pipeline {
-    agent any
+pipeline 
+{  
+agent any
+stages
+{
+stage ('SCM Checkout') {
 
-
-    stages {
-        stage('SCM Checkout'){
-           steps {
-          git 'https://github.com/jyotibhalerao15/maven-project'
-          }
-                             }
-           
-    
-        stage ('Compile Stage')
-        {
-        agent {label 'master-node'}
-        
-
-            steps {
-                withMaven(maven : 'local-maven') {
-                    sh 'mvn clean install'
-                                                  }
-                  }
-                
+   steps { 
+   git 'https://github.com/jyotibhalerao15/maven-project.git'
          }
-
-      stage ('Deploy')
-              {
-                steps {
-                    
- 
-                      sshagent (credentials: ['f6201e5b-e1ee-49ef-b462-bffc4fd69059']) {
-                     sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline-demo-maven/webapp/target/*.war ec2-user@3.14.82.29:/var/lib/tomcat/webapps'
-                    }
-                    
-                    }
-              }
-             
+                     }
+stage ('Clean')
+{
+steps
+{ withAnt (installation: 'ant',jdk :'jdk')
+sh 'ant clean'
 }
- post {
-    success {
-      // notify users when the Pipeline fails
-      //mail to: 'jyoti.bhalerao15@gmail.com',
-       //   subject: "Success Build",
-        //  body: "Finished job successfully"
-        echo " JOB done successfully"
-    }
-  }
+}
+
+stage ('Create work dir')
+{
+steps
+{ withAnt (installation: 'ant',jdk :'jdk')
+sh 'ant init'
+}
+}
+
+stage ('Copy resources')
+{
+steps
+{ withAnt (installation: 'ant',jdk :'jdk')
+sh 'ant resources'
+}
+}
+
+
+stage ('resolve')
+{
+steps
+{ withAnt (installation: 'ant',jdk :'jdk')
+sh 'ant resolve'
+}
+}
+
+
+stage ('build')
+{
+steps
+{ withAnt (installation: 'ant',jdk :'jdk')
+sh 'ant build'
+}
+}
+
+stage ('test')
+{
+steps
+{ withAnt (installation: 'ant',jdk :'jdk')
+sh 'ant test'
+}
+}
+
+
+stage ('Create work dir')
+{
+steps
+{ withAnt (installation: 'ant',jdk :'jdk')
+sh 'ant init'
+}
+}
+
+stage ('archive')
+{
+steps
+{ withAnt (installation: 'ant',jdk :'jdk')
+sh 'ant war'
+}
+}
+
+}
+
+
 }
