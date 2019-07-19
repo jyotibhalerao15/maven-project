@@ -33,7 +33,6 @@ sh 'ant resources'
 }
 }
 
-
 stage ('resolve')
 {
 steps
