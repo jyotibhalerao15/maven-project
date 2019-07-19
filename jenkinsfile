@@ -6,7 +6,11 @@ stages
 stage ('SCM Checkout') {
 
    steps { 
-   git 'https://github.com/jyotibhalerao15/maven-project'
+   withCredentials([usernameColonPassword(credentialsId: '698590d6-13ed-4d11-913c-9734df5e5b0a', variable: '')]) {
+    // some block
+    git 'https://github.com/jyotibhalerao15/maven-project'
+}
+   
          }
                      }
 stage ('Clean')
