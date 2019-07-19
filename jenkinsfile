@@ -12,7 +12,7 @@ stage ('SCM Checkout') {
 stage ('Clean')
 {
 steps
-{ withAnt (installation: 'ant',jdk :'jdk')
+{ withAnt (installation:'ant',jdk :'jdk')
 sh 'ant clean'
 }
 }
@@ -20,7 +20,7 @@ sh 'ant clean'
 stage ('Init')
 {
 steps
-{ withAnt (installation: 'ant',jdk :'jdk')
+{ withAnt (installation:'ant',jdk :'jdk')
 sh 'ant init'
 }
 }
@@ -28,7 +28,7 @@ sh 'ant init'
 stage ('Copy resources')
 {
 steps
-{ withAnt (installation: 'ant',jdk :'jdk')
+{ withAnt (installation:'ant',jdk :'jdk')
 sh 'ant resources'
 }
 }
@@ -36,7 +36,7 @@ sh 'ant resources'
 stage ('resolve')
 {
 steps
-{ withAnt (installation: 'ant',jdk :'jdk')
+{ withAnt (installation:'ant',jdk :'jdk')
 sh 'ant resolve'
 }
 }
@@ -45,7 +45,7 @@ sh 'ant resolve'
 stage ('build')
 {
 steps
-{ withAnt (installation: 'ant',jdk :'jdk')
+{ withAnt (installation:'ant',jdk :'jdk')
 sh 'ant build'
 }
 }
@@ -53,7 +53,7 @@ sh 'ant build'
 stage ('test')
 {
 steps
-{ withAnt (installation: 'ant',jdk :'jdk')
+{ withAnt (installation:'ant',jdk :'jdk')
 sh 'ant test'
 }
 }
@@ -62,7 +62,7 @@ sh 'ant test'
 stage ('Create work dir')
 {
 steps
-{ withAnt (installation: 'ant',jdk :'jdk')
+{ withAnt (installation:'ant',jdk :'jdk')
 sh 'ant init'
 }
 }
@@ -70,7 +70,7 @@ sh 'ant init'
 stage ('archive')
 {
 steps
-{ withAnt (installation: 'ant',jdk :'jdk')
+{ withAnt (installation:'ant',jdk :'jdk')
 sh 'ant war'
 }
 }
