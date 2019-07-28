@@ -3,10 +3,7 @@ node{
 	git ('https://github.com/jyotibhalerao15/maven-project')
 	}
 	
-	stage('Checkout to different branch') {
-        sh "git branch -r"
-        sh "git checkout ci-cd-with-docker"
-    }
+
 	
 	stage ('package stage') {
        sh label: local-maven, script: 'mvn clean package '
