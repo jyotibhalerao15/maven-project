@@ -1,85 +1,39 @@
-pipeline 
-{  
-agent any
-stages
-{
-stage ('SCM Checkout') {
-
-   steps { 
-   withCredentials([usernameColonPassword(credentialsId: '698590d6-13ed-4d11-913c-9734df5e5b0a', variable: '')]) {
-    // some block
-    git 'https://github.com/jyotibhalerao15/maven-project'
-}
-   
-         }
-                     }
-stage ('Clean')
-{
-steps
-{ withAnt (installation:'ant',jdk :'jdk')
-sh 'ant clean'
-}
-}
-
-stage ('Init')
-{
-steps
-{ withAnt (installation:'ant',jdk :'jdk')
-sh 'ant init'
-}
-}
-
-stage ('Copy resources')
-{
-steps
-{ withAnt (installation:'ant',jdk :'jdk')
-sh 'ant resources'
-}
-}
-
-stage ('resolve')
-{
-steps
-{ withAnt (installation:'ant',jdk :'jdk')
-sh 'ant resolve'
-}
-}
+pipeline {
+    agent any
 
 
-stage ('build')
-{
-steps
-{ withAnt (installation:'ant',jdk :'jdk')
-sh 'ant build'
-}
-}
+ stages {
+        stage('SCM Checkout')
+		   {
+          git 'https://github.com/jyotibhalerao15/maven-project'
+           }
+  
+    
+        stage ('Compile Stage') {
 
-stage ('test')
-{
-steps
-{ withAnt (installation:'ant',jdk :'jdk')
-sh 'ant test'
-}
-}
+            steps {
+                withMaven(maven : 'LocalMaven') {
+                    sh 'mvn clean compile'
+                }
+            }
+        }
+    
+        stage ('Testing Stage') {
 
-
-stage ('Create work dir')
-{
-steps
-{ withAnt (installation:'ant',jdk :'jdk')
-sh 'ant init'
-}
-}
-
-stage ('archive')
-{
-steps
-{ withAnt (installation:'ant',jdk :'jdk')
-sh 'ant war'
-}
-}
-
-}
+            steps {
+                withMaven(maven : 'LocalMaven') {
+                    sh 'mvn test'
+                }
+            }
+        }
 
 
-}
+        stage ('install Stage') {
+            steps {
+                withMaven(maven : 'LocalMaven') {
+                    sh 'mvn install'
+                }
+            }
+        }
+	}
+	}
