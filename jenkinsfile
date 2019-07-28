@@ -32,7 +32,7 @@ pipeline {
         stage ('install Stage') {
             steps {
                 withMaven(maven : 'local-maven') {
-                    sh 'mvn install'
+                    sh 'mvn install' > test.txt
                 }
             }
         }
