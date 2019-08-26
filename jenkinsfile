@@ -47,6 +47,8 @@ pipeline {
 	steps 
 	   {
 	   sh 'echo Build has been successfully completed'
+	  sh  echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+
 	   
 	   }
 	
